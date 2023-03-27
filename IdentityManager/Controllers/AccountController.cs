@@ -23,6 +23,8 @@ public class AccountController : Controller
         return View();
     }
 
+    #region Register
+
     [HttpGet]
     public Task<IActionResult> Register(CancellationToken cancellationToken, string? returnUrl = null)
     {
@@ -62,6 +64,10 @@ public class AccountController : Controller
         return View(model);
     }
 
+    #endregion
+
+    #region Login
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
@@ -96,6 +102,10 @@ public class AccountController : Controller
         return Task.FromResult<IActionResult>(View());
     }
 
+    #endregion
+
+    #region Logout
+
     [HttpPost]
     public async Task<IActionResult> Logout()
     {
@@ -104,11 +114,25 @@ public class AccountController : Controller
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }
 
-    [HttpPost]
+
+    #endregion
+
+    #region ForGetPassword
+
+    [HttpGet]
     public IActionResult ForGetPassword()
     {
-        throw new NotImplementedException();
+        return View();
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ForGetPassword(ForgotPasswordModel model, CancellationToken cancellationToken)
+    {
+        return View();
+    }
+
+    #endregion
 
     #region Helper Methods
 
