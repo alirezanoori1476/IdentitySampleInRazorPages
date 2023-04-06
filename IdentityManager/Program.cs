@@ -1,4 +1,5 @@
 using IdentityManager.Data;
+using IdentityManager.Services.EmailService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllersWithViews();
-
+        builder.Services.AddScoped<IEmailService>();
         builder.Services
             .AddDbContext<ApplicationDbContext>(options => options
                 .UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
