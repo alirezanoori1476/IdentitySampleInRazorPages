@@ -28,6 +28,7 @@
     <_ContentIncludedByDefault Remove="Views\Account\ForGetPassword.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Account\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Account\Login.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Account\ForGetPassword.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
 
 </Project>
