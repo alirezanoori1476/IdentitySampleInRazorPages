@@ -32,9 +32,16 @@ public class Program
                 a.Password.RequiredLength = 5;
                 a.Password.RequireLowercase = true;
                 a.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                a.Lockout.MaxFailedAccessAttempts = 2;
+                a.Lockout.MaxFailedAccessAttempts = 6;
+                a.SignIn.RequireConfirmedAccount = true;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+        builder.Services.AddAuthentication().AddFacebook(a =>
+        {
+            a.AppId = ""; //your appId from facebook
+            a.AppSecret = ""; //your appSecret from facebook
+        });
 
         var app = builder.Build();
 
@@ -46,13 +53,9 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
-
         app.UseAuthentication();
         app.UseAuthorization();
-
-
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");

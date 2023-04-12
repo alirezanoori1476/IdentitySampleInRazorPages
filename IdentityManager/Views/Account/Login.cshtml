@@ -1,4 +1,7 @@
 ﻿@model IdentityManager.Models.LoginViewModel;
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager;
+
 
 <h1 class="text-info">Login</h1>
 
@@ -52,6 +55,33 @@
             </p>
         </form>
     </div>
+    @{
+        var schemes = SignInManager.GetExternalAuthenticationSchemesAsync().Result.ToList();
+    }
+    @if (schemes.Count > 0)
+    {
+        <div class="col-md-4">
+            <section>
+                <h4>User another service to log in.</h4>
+                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-retunurl="@ViewData["ReturnUrl"]" method="post" role="form">
+                    <div>
+                        <p>
+                            @foreach (var provider in schemes)
+                            {
+                                <button type="submit"
+                                        class="btn btn-primary"
+                                        name="provider"
+                                        value="@provider.Name"
+                                        title="Log in using your @provider.Name account">
+                                </button>
+                            }
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    }
+
 </div>
 
 @section Scripts{
